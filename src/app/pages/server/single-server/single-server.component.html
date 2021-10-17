@@ -1,0 +1,39 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-6'>
+      <nb-card>
+        <nb-card-header>
+          {{server?.name}}
+        </nb-card-header>
+        <img *ngIf="image?.imageType?.imageType" [src]='"assets/images/" + image.imageType.imageType + ".jpg"' />
+      </nb-card>
+    </div>
+
+    <div class='col-md-6'>
+      <nb-card>
+        <nb-card-header>
+          Server Status
+        </nb-card-header>
+        <nb-list>
+          <nb-list-item>
+            <p>
+              Status: <strong> {{serverInfo?.State.Status || "Not Running"}} </strong>
+            </p>
+          </nb-list-item>
+          <nb-list-item>
+            <p>
+              Port: <strong> {{server?.serverPort}} </strong>
+            </p>
+          </nb-list-item>
+        </nb-list>
+        <nb-card-footer class='pull-right'>
+          <button nbButton status="warning" (click)="stopServer()">Stop</button>
+          <button nbButton status="success" (click)="startServer()">Start</button>
+          <button nbButton status="info" (click)="stats()">stats</button>
+        </nb-card-footer>
+      </nb-card>
+
+    </div>
+
+  </div>
+</div>

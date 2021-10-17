@@ -1,0 +1,127 @@
+<h1>{{instanceInfo?.ID}}</h1>
+<ngx-containers *ngIf="containers" [containers]="containers"></ngx-containers>
+<ngx-images *ngIf="images" [images]="images"></ngx-images>
+
+<nb-card status="warning" *ngIf='instanceInfo?.Warnings'>
+  <nb-card-header>Warnings</nb-card-header>
+  <nb-card-body>
+    <p *ngFor='let el of instanceInfo.Warnings'>{{el}}</p>
+  </nb-card-body>
+</nb-card>
+
+<div class="row">
+
+  <div class="col-md-8" *ngIf='instanceInfo?.Plugins'>
+    <nb-card>
+      <nb-card-header>
+        Plugins
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let plugin of Plugins | async | keyvalue">
+          <p>{{ plugin.key }}: <strong> {{plugin.value?.join(',')}}</strong></p>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+
+  <div class="col-md-4" *ngIf='instanceInfo'>
+    <nb-card>
+      <nb-card-header>
+        Containers
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item ><p>Containers: <strong> {{instanceInfo.Containers}}</strong></p></nb-list-item>
+        <nb-list-item ><p>Containers Running: <strong> {{instanceInfo.ContainersRunning}}</strong></p></nb-list-item>
+        <nb-list-item ><p>Containers Stopped: <strong> {{instanceInfo.ContainersStopped}}</strong></p></nb-list-item>
+        <nb-list-item ><p>Containers Paused: <strong> {{instanceInfo.ContainersPaused}}</strong></p></nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+
+
+  <div class="col-md-6" *ngIf='Others'>
+    <nb-card>
+      <nb-card-header>
+        Infos
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let driver of Others | async | keyvalue | pickEvenOdd:false">
+          <p>{{ driver.key }}: <strong> {{driver.value}}</strong></p>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+
+  <div class="col-md-6" *ngIf='Others'>
+    <nb-card>
+      <nb-card-header>
+        Infos
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let driver of Others | async | keyvalue | pickEvenOdd:true">
+          <p>{{ driver.key }}: <strong> {{driver.value}}</strong></p>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+
+  <div class="col-md-4" *ngIf='instanceInfo?.DriverStatus'>
+    <nb-card>
+      <nb-card-header>
+        Driver Status
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let driver of instanceInfo.DriverStatus">
+          <p>{{ driver[0] }}: <strong> {{driver[1]}}</strong></p>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+
+  <div class="col-md-4" *ngIf='instanceInfo?.SecurityOptions'>
+    <nb-card>
+      <nb-card-header>
+        Security Options
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let securityOption of instanceInfo.SecurityOptions">
+          <p>{{ securityOption }}</p>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+
+  <div class="col-md-4" *ngIf='instanceInfo?.Labels'>
+    <nb-card>
+      <nb-card-header>
+        Labels
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let label of instanceInfo.Labels">
+          <p>{{ label[0] }}: <strong> {{label[1]}}</strong></p>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+
+</div>
+
+<div class="row">
+
+</div>
+
+<div class="row">
+
+</div>
+
+
+<!--<div  *ngFor='let e of instanceInfoArrays | keyvalue'>-->
+<!--  <nb-card>-->
+<!--    <nb-card-header>{{e.key}}</nb-card-header>-->
+<!--    <nb-card-body>-->
+<!--      <p *ngFor='let el of e.value'>{{el | arrayJoiner}}</p>-->
+<!--    </nb-card-body>-->
+<!--  </nb-card>-->
+<!--</div>-->
+
+
